@@ -1,7 +1,8 @@
 package exercise_6_6;
 
-import java.util.ArrayList;
-import java.util.List;
+
+
+
 import java.util.Scanner;
 
 public class Hindex {
@@ -36,17 +37,36 @@ public class Hindex {
 		// TODO Auto-generated method stub
 		Scanner in =new Scanner(System.in);
 		System.out.println("plz input an array (spilted by ,)");
-		String string=in.nextLine();
-		//spilt str to int
-		int[] inputdata=new int[100];
+		String string=new String();
 		String strs[];
-		strs=string.split(",");
-		for (int i = 0; i < strs.length; i++) 
-		{
-			inputdata[i]=Integer.parseInt(strs[i]);
+		int[] inputdata=new int[100];
+		while (true) {//loop to check illegal input
+			string=in.nextLine();
+			if (string.length()==0) {//deal with empty input
+				System.out.println("input empty plz reinput");
+				continue;
+			}
+			boolean legalnumber=true;
+			strs=string.split(",");
+			for (int i = 0; i < strs.length; i++) {
+				if(!strs[i].matches("[0-9]+"))
+				{
+					System.out.println(strs[i]+"is illegal ,plz input again");
+					legalnumber=false;
+					break;
+				}
+				inputdata[i]=Integer.parseInt(strs[i]);
+			}
+			if(!legalnumber) {
+				continue;
+			}
+			else {
+				sortingarray(inputdata);
+				int hindex=calculatehindex(inputdata);
+				System.out.println("the h-index is:"+hindex);
+				break;
+			}
 		}
-		sortingarray(inputdata);
-		int hindex=calculatehindex(inputdata);
-		System.out.println("the h-index is:"+hindex);
+
 	}
 }
