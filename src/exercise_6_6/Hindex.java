@@ -3,6 +3,8 @@ package exercise_6_6;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Hindex {
@@ -21,11 +23,16 @@ public class Hindex {
 			}
 		}
 	}
-	public static int calculatehindex(int inputdata[]) {		//calculate hindex
+	public static int calculatehindex(List<Integer> inputdata) {		//calculate hindex
 		int hindex=0;
-		for (int i = 0; i < inputdata.length; i++) 
+		int[] inputdataarray =new int[inputdata.size()];
+		for (int i = 0; i < inputdataarray.length; i++) {
+			inputdataarray[i]=inputdata.get(i);
+		}
+		sortingarray(inputdataarray);
+		for (int i = 0; i < inputdataarray.length; i++) 
 		{
-			if(inputdata[i]>=i+1)
+			if(inputdataarray[i]>=i+1)
 				hindex=i+1;
 			else 
 				break;
@@ -39,7 +46,8 @@ public class Hindex {
 		System.out.println("plz input an array (spilted by ,)");
 		String string=new String();
 		String strs[];
-		int[] inputdata=new int[100];
+		//int[] inputdata=new int[100];
+		List<Integer> inputdata=new ArrayList<Integer>();
 		while (true) {//loop to check illegal input
 			string=in.nextLine();
 			if (string.length()==0) {//deal with empty input
@@ -55,13 +63,12 @@ public class Hindex {
 					legalnumber=false;
 					break;
 				}
-				inputdata[i]=Integer.parseInt(strs[i]);
+				inputdata.add(Integer.parseInt(strs[i]));
 			}
 			if(!legalnumber) {
 				continue;
 			}
 			else {
-				sortingarray(inputdata);
 				int hindex=calculatehindex(inputdata);
 				System.out.println("the h-index is:"+hindex);
 				break;
