@@ -5,6 +5,32 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Hindex {
+	public static void sortingarray(int inputdata[]) {		//sorting
+		for (int i = 0; i < inputdata.length-1; i++) 
+		{
+			for (int j = i; j < inputdata.length; j++) 
+			{
+				if (inputdata[i]<inputdata[j]) 
+				{
+					int temp;
+					temp=inputdata[i];
+					inputdata[i]=inputdata[j];
+					inputdata[j]=temp;
+				}
+			}
+		}
+	}
+	public static int calculatehindex(int inputdata[]) {		//calculate hindex
+		int hindex=0;
+		for (int i = 0; i < inputdata.length; i++) 
+		{
+			if(inputdata[i]>=i+1)
+				hindex=i+1;
+			else 
+				break;
+		}
+		return hindex;
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -19,29 +45,8 @@ public class Hindex {
 		{
 			inputdata[i]=Integer.parseInt(strs[i]);
 		}
-		//sorting
-		for (int i = 0; i < inputdata.length-1; i++) 
-		{
-			for (int j = i; j < inputdata.length; j++) 
-			{
-				if (inputdata[i]<inputdata[j]) 
-				{
-					int temp;
-					temp=inputdata[i];
-					inputdata[i]=inputdata[j];
-					inputdata[j]=temp;
-				}
-			}
-		}
-		int hindex=0;
-		for (int i = 0; i < inputdata.length; i++) 
-		{
-			if(inputdata[i]>=i+1)
-				hindex=i+1;
-			else 
-				break;
-		}
+		sortingarray(inputdata);
+		int hindex=calculatehindex(inputdata);
 		System.out.println("the h-index is:"+hindex);
 	}
-
 }
